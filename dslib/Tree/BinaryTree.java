@@ -56,7 +56,7 @@ public class BinaryTree<T extends Comparable<T>> {
     }
 
     /**
-     * Set the root of the tree specifically
+     * Set the root of the tree specifically.
      * @param root the node we want to assign to current root.
      */
     public void setRoot(Node<T> root) {
