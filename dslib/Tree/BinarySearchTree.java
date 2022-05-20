@@ -70,6 +70,10 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T>{
         return false;
     }
 
+    /**
+     * Delete a value in the tree.
+     * @param val value to be deleted.
+     */
     public void delete(T val) {
         if (getRoot() == null) {
             System.out.println("Empty tree, cannot delete!");
@@ -81,6 +85,7 @@ public class BinarySearchTree<T extends Comparable<T>> extends BinaryTree<T>{
         }
         setRoot(deleteHelper(root, val));
     }
+
 
     private Node<T> deleteHelper(Node<T> node, T val) {
         if (node == null) {
