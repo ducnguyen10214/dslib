@@ -3,14 +3,41 @@ package dslib.Tree;
 import java.util.ArrayDeque;
 import java.util.Stack;
 
-public class BinaryTree<T> {
+public class BinaryTree<T extends Comparable<T>> {
 
-    private static class Node<T> {
+    public static class Node<T> {
         private T val;
+
         private Node<T> left;
+
         private Node<T> right;
+
         Node(T val) {
             this.val = val;
+        }
+
+        public void setVal(T val) {
+            this.val = val;
+        }
+
+        public T getVal() {
+            return this.val;
+        }
+
+        public void setLeft(Node<T> left) {
+            this.left = left;
+        }
+
+        public void setRight(Node<T> right) {
+            this.right = right;
+        }
+
+        public Node<T> getLeft() {
+            return this.left;
+        }
+
+        public Node<T> getRight() {
+            return this.right;
         }
     }
 
@@ -21,56 +48,72 @@ public class BinaryTree<T> {
     }
 
     /**
-     * level-order insertion to the binary tree.
+     * Retrieve the root node of the tree.
+     * @return root
+     */
+    public Node<T> getRoot() {
+        return root;
+    }
+
+    /**
+     * Set the root of the tree specifically
+     * @param root the node we want to assign to current root.
+     */
+    public void setRoot(Node<T> root) {
+        this.root = root;
+    }
+
+    /**
+     * Level-order insertion into the binary tree.
      * @param val the new value to be inserted.
      */
     public void insert(T val) {
         Node<T> newNode = new Node<>(val);
-        if (root == null) {
-            root = newNode;
+        if (getRoot() == null) {
+            setRoot(newNode);
             return;
         }
         ArrayDeque<Node<T>> deque = new ArrayDeque<>();
-        deque.add(root);
+        deque.add(getRoot());
         while (!deque.isEmpty()) {
             int n = deque.size();
             for (int i = 0; i < n; i += 1) {
                 Node<T> top = deque.pollFirst();
-                if (top.left == null) {
-                    top.left = newNode;
+                if (top.getLeft() == null) {
+                    top.setLeft(newNode);
                     return;
                 }
-                if (top.right == null) {
-                    top.right = newNode;
+                if (top.getRight() == null) {
+                    top.setRight(newNode);
                     return;
                 }
-                deque.add(top.left);
-                deque.add(top.right);
+                deque.add(top.getLeft());
+                deque.add(top.getRight());
             }
         }
     }
 
     /**
-     * return the preorder-traversal string of the tree.
+     * The preorder-traversal string of the tree.
      * @return String
      */
     public String toStringPreorder() {
-        if (root == null) {
+        if (getRoot() == null) {
             return "Empty tree.";
         }
         ArrayDeque<Node<T>> deque = new ArrayDeque<>();
-        deque.add(root);
+        deque.add(getRoot());
         StringBuilder result = new StringBuilder("Preorder traversal: ");
         while (!deque.isEmpty()) {
             int n = deque.size();
             for (int i = 0; i < n; i += 1) {
                 Node<T> top = deque.pollFirst();
-                result.append(top.val).append(" ");
-                if (top.left != null) {
-                    deque.add(top.left);
+                result.append(top.getVal()).append(" ");
+                if (top.getLeft() != null) {
+                    deque.add(top.getLeft());
                 }
-                if (top.right != null) {
-                    deque.add(top.right);
+                if (top.getRight() != null) {
+                    deque.add(top.getRight());
                 }
             }
         }
@@ -78,45 +121,49 @@ public class BinaryTree<T> {
     }
 
     /**
-     * return the inorder-traversal string of the tree.
+     * The inorder-traversal string of the tree.
      * @return String
      */
     public String toStringInorder() {
-        if (root == null) {
+        if (getRoot() == null) {
             return "Empty tree.";
         }
         Stack<Node<T>> stack = new Stack<>();
-        Node<T> curr = root;
+        Node<T> curr = getRoot();
         StringBuilder result = new StringBuilder("Inorder traversal: ");
         while(!stack.isEmpty() || curr != null) {
             if (curr != null) {
                 stack.push(curr);
-                curr = curr.left;
+                curr = curr.getLeft();
             } else {
                 curr = stack.pop();
-                result.append(curr.val).append(" ");
-                curr = curr.right;
+                result.append(curr.getVal()).append(" ");
+                curr = curr.getRight();
             }
         }
         return result.toString().trim();
     }
 
+    /**
+     * The postorder-traversal string of the tree.
+     * @return String
+     */
     public String toStringPostorder() {
-        if (root == null) {
+        if (getRoot() == null) {
             return "Empty tree.";
         }
         Stack<Node<T>> stack = new Stack<>();
         StringBuilder rs = new StringBuilder("Postorder traversal: ");
         Stack<T> elements = new Stack<>();
-        stack.push(root);
+        stack.push(getRoot());
         while (!stack.isEmpty()) {
             Node<T> top = stack.pop();
-            elements.push(top.val);
-            if (top.left != null) {
-                stack.push(top.left);
+            elements.push(top.getVal());
+            if (top.getLeft() != null) {
+                stack.push(top.getLeft());
             }
-            if (top.right != null) {
-                stack.push(top.right);
+            if (top.getRight() != null) {
+                stack.push(top.getRight());
             }
         }
         while (!elements.isEmpty()) {
