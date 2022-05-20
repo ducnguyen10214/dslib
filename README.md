@@ -1,9 +1,5 @@
 # dslib
-<<<<<<< HEAD
-A Java library of common data structures that are not included in the Java Collection Framework.
-=======
  A Java library of common data structures that are not included in the Java Collection Framework.
->>>>>>> 7066ee156dd22fc7a1542b1c0156a4ab2af9c323
 ## Binary Trees
 - `BinaryTree()`: constructor with `root` set to null.<br>
 - `getRoot()`: retrieve the root node of the tree.<br>
