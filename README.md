@@ -5,6 +5,7 @@
 - `getRoot()`: retrieve the root node of the tree.<br>
 - `setRoot()`: set the root of the tree specifically.<br>
 - `insert(T val)`: level-order insertion into the binary tree.<br>
+- `toStringLevelOrder()`: the level-order traversal string of the tree.<br>
 - `toStringPreorder()`: the preorder-traversal string of the tree.<br>
 - `toStringInorder()`: the inorder-traversal string of the tree.<br>
 - `toStringPostorder()`: the postorder-traversal string of the tree.<br>
