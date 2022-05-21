@@ -3,8 +3,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class BinarySearchTreeTest {
+
     @Test
-    public void testPreorder() {
+    public void testLevelOrder() {
         BinarySearchTree<Integer> tree = new BinarySearchTree<>();
         tree.insert(5);
         tree.insert(1);
@@ -12,7 +13,34 @@ public class BinarySearchTreeTest {
         tree.insert(7);
         tree.insert(8);
         tree.insert(2);
-        String testResult = new String("Preorder traversal: 5 1 6 2 7 8");
+        String testResult = new String("Level-order traversal: 5 1 6 2 7 8");
+        Assert.assertEquals(testResult, tree.toStringLevelOrder());
+    }
+
+    @Test
+    public void testPreorder() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.insert(5);
+        tree.insert(3);
+        tree.insert(7);
+        tree.insert(1);
+        tree.insert(4);
+        tree.insert(6);
+        tree.insert(8);
+        String testResult = new String("Preorder traversal: 5 3 1 4 7 6 8");
+        Assert.assertEquals(testResult, tree.toStringPreorder());
+    }
+
+    @Test
+    public void testPreorder1() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.insert(5);
+        tree.insert(1);
+        tree.insert(6);
+        tree.insert(2);
+        tree.insert(7);
+        tree.insert(8);
+        String testResult = new String("Preorder traversal: 5 1 2 6 7 8");
         Assert.assertEquals(testResult, tree.toStringPreorder());
     }
 
@@ -79,7 +107,8 @@ public class BinarySearchTreeTest {
         tree.insert(30);
 
         tree.delete(42);
-        String testResult = new String("Preorder traversal: 50 19 60 16 30 91");
-        Assert.assertEquals(tree.toStringPreorder(), testResult);
+        String testResult = new String("Level-order traversal: 50 19 60 16 30" +
+                " 91");
+        Assert.assertEquals(tree.toStringLevelOrder(), testResult);
     }
 }

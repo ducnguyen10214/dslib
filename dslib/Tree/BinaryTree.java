@@ -94,16 +94,16 @@ public class BinaryTree<T extends Comparable<T>> {
     }
 
     /**
-     * The preorder-traversal string of the tree.
+     * Level-order traversal string of the tree.
      * @return String
      */
-    public String toStringPreorder() {
+    public String toStringLevelOrder() {
         if (getRoot() == null) {
             return "Empty tree.";
         }
         ArrayDeque<Node<T>> deque = new ArrayDeque<>();
         deque.add(getRoot());
-        StringBuilder result = new StringBuilder("Preorder traversal: ");
+        StringBuilder result = new StringBuilder("Level-order traversal: ");
         while (!deque.isEmpty()) {
             int n = deque.size();
             for (int i = 0; i < n; i += 1) {
@@ -121,7 +121,35 @@ public class BinaryTree<T extends Comparable<T>> {
     }
 
     /**
-     * The inorder-traversal string of the tree.
+     * Preorder traversal string of the tree.
+     * @return String
+     */
+    public String toStringPreorder() {
+        if (getRoot() == null) {
+            return "Empty tree.";
+        }
+        Stack<Node<T>> stack = new Stack<>();
+        ArrayDeque<T> elements = new ArrayDeque<>();
+        StringBuilder result = new StringBuilder("Preorder traversal: ");
+        stack.push(getRoot());
+        while (!stack.isEmpty()) {
+            Node<T> top = stack.pop();
+            elements.addLast(top.getVal());
+            if (top.getRight() != null) {
+                stack.push(top.getRight());
+            }
+            if (top.getLeft() != null) {
+                stack.push(top.getLeft());
+            }
+        }
+        while (!elements.isEmpty()) {
+            result.append(elements.poll()).append(" ");
+        }
+        return result.toString().trim();
+    }
+
+    /**
+     * Inorder-traversal string of the tree.
      * @return String
      */
     public String toStringInorder() {
@@ -145,7 +173,7 @@ public class BinaryTree<T extends Comparable<T>> {
     }
 
     /**
-     * The postorder-traversal string of the tree.
+     * Postorder-traversal string of the tree.
      * @return String
      */
     public String toStringPostorder() {
